@@ -266,7 +266,7 @@ def ingest():
         success, message_id, sqs_error = send_to_sqs(normalized)
 
         if not success:
-            logger.error(f"SQS send failed for log_id={normalized["log_id"]}: {sqs_error}")
+            logger.error(f"SQS send failed for log_id={normalized['log_id']}: {sqs_error}")
             return jsonify({
                 "error": "Queue unavailable",
                 "message": "Please retry your request",

@@ -65,3 +65,12 @@ Thumbs.db
 # Local test files
 test_output/
 tmp/
+
+# Lambda dependencies (installed during terraform apply)
+src/api/*
+!src/api/app.py
+!src/api/lambda_handler.py
+!src/api/requirements.txt
+src/worker/*
+!src/worker/handler.py
+!src/worker/requirements.txt
