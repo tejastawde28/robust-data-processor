@@ -34,28 +34,3 @@ output "aws_region" {
   description = "AWS region"
   value       = var.aws_region
 }
-
-# Helpful test commands
-output "test_commands" {
-  description = "Commands to test the API"
-  value       = <<-EOT
-
-  # Health Check:
-  curl ${aws_lambda_function_url.api_url.function_url}health
-
-  # JSON Ingestion:
-  curl -X POST ${aws_lambda_function_url.api_url.function_url}ingest \
-    -H "Content-Type: application/json" \
-    -d '{"tenant_id": "acme_corp", "log_id": "test-001", "text": "User 555-0199 logged in"}'
-
-  # Text Ingestion:
-  curl -X POST ${aws_lambda_function_url.api_url.function_url}ingest \
-    -H "Content-Type: text/plain" \
-    -H "X-Tenant-ID: beta_inc" \
-    -d "Error log with phone 123-456-7890"
-
-  # Check DynamoDB (after processing):
-  aws dynamodb scan --table-name ${aws_dynamodb_table.processed_logs.name} --region ${var.aws_region}
-
-  EOT
-}
